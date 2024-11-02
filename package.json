@@ -1,0 +1,51 @@
+{
+  "name": "earth-cli",
+  "version": "1.0.0",
+  "description": "组件库打包工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangxv/Earth-Cli.git"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "wangxv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wangxv/Earth-Cli/issues"
+  },
+  "homepage": "https://github.com/wangxv/Earth-Cli#readme",
+  "dependencies": {
+    "address": "^2.0.3",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
+    "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^9.0.2",
+    "fs-extra": "^11.2.0",
+    "highlight.js": "^11.10.0",
+    "html-webpack-plugin": "^5.6.3",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
+    "mini-css-extract-plugin": "^2.9.2",
+    "portfinder": "^1.0.32",
+    "postcss-loader": "^8.1.1",
+    "style-loader": "^4.0.0",
+    "url-loader": "^4.1.1",
+    "vue-loader": "^17.4.2",
+    "webpack": "^5.96.1",
+    "webpack-dev-server": "^5.1.0",
+    "webpack-merge": "^6.0.1",
+    "webpackbar": "^6.0.1"
+  }
+}
