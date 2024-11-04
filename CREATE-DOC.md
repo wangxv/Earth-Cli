@@ -70,3 +70,36 @@ Node.js生态中广受欢迎的文件系统扩展库，它扩展并增强了原�
 - 自定义样式：用户可以通过配置选项来自定义锚点链接的样式，包括链接的class、符号等。这有助于保持网站风格的统一，并提升用户体验。
 - 支持多种语言：Markdown-it-Anchor支持多种语言的标题ID生成，使得它可以在国际化的项目中得到广泛应用。
 - 易于集成：Markdown-it-Anchor作为Markdown-it的插件，易于集成到现有的Markdown解析流程中。用户只需在JavaScript文件中引入并配置该插件，即可实现标题锚点的自动生成。
+
+## tapable
+Tapable是webpack内部使用的一个流程管理工具，它主要用于串联插件和完善事件流执行。
+
+
+- SyncHook：基础钩子，注册的事件会依次执行。无法中断执行流程，即使某个事件回调有返回值，后面的事件回调仍然会继续执行。
+- SyncBailHook：具有熔断风格的钩子。只要其中一个事件回调有返回值（非undefined），后面的事件回调就不会再执行。
+- SyncLoopHook：循环类型的钩子。会不停地循环执行事件回调，直到所有函数的结果都为undefined。如果不符合条件（即函数返回非undefined值），则从第一个事件回调开始重新执行。
+- SyncWaterfallHook：瀑布式类型的钩子。上一个事件的执行结果会作为下一个事件的第一个参数。如果某个事件回调返回undefined，则继续执行下一个事件回调，并将该结果传递给它；否则，后续的事件回调将不再执行。
+
+```js
+const { SyncHook, SyncBailHook, SyncLoopHook, SyncWaterfallHook } = require('tapable');  
+  
+// 示例：SyncHook  
+const syncHook = new SyncHook(['name', 'age']);  
+syncHook.tap('listener1', (name, age) => {  
+  console.log('Listener1:', name, age);  
+});  
+syncHook.call('Alice', 30); // 输出：Listener1: Alice 30  
+```
+
+## ora
+Ora是一个用于在Node.js中创建和管理终端转轮的库。它提供了一个简单而优雅的API，用于在命令行界面上显示旋转器、进度条或其他形式的实时反馈。
+- 显示旋转器：Ora可以在终端中显示一个旋转的符号，以表示某个操作正在进行中。
+- 更新文本：可以动态地更新旋转器旁边的文本，以提供有关操作进度的更多信息。
+- 停止旋转器：当操作完成时，可以停止旋转器，并显示一个成功、失败或警告的符号。
+
+## execa
+Execa是一个用于在Node.js中执行子进程的库。它提供了一个简单的API，用于启动新的进程、与其进行交互并获取其结果。
+
+- 执行命令：Execa可以执行任何命令行命令，并捕获其标准输出、标准错误和退出代码。
+- 处理输入/输出：可以将数据传递给子进程的标准输入，并从其标准输出或标准错误中读取数据。
+- 跨平台兼容性：Execa旨在在不同操作系统上提供一致的行为，包括Windows、macOS和Linux。

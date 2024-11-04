@@ -2,8 +2,8 @@ import { VueLoaderPlugin } from 'vue-loader';
 import { WebpackConfig } from '../types';
 import mainConfig from './';
 import cssLoaders from '../loaders/cssLoaders';
-import { assetsPath } from '../utils'
-const babelConfig = require('./babel.config');
+import { assetsPath } from '../utils';
+import babelConfig from './babel.config';
 const { jsExcludes, jsIncludes, alias, customLoaders, webpackPlugins } = mainConfig;
 
 const CACHE_LOADER = {

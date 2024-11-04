@@ -1,0 +1,25 @@
+import { OuterConfig } from '../types';
+declare const mainConfig: {
+    entry: import("../types").ObjectType;
+    htmlTemplateOptions: import("../types").TemplateOptions[];
+    outputPath: string;
+    assetsPublicPath: string;
+    cacheDir: string;
+    babelPlugins: any[];
+    jsIncludes: any;
+    rollupJsIncludes: any;
+    jsExcludes: RegExp[];
+    alias: any;
+    sourceMap: boolean;
+    extractCss: OuterConfig;
+    customLoaders: any[];
+    webpackPlugins: any[];
+    componentsPath: any;
+    external: string[];
+    rollupExternal: string[];
+    rollupReplacer: import("../types").ObjectType;
+    componentsSrc: string;
+    utilsFileName: string;
+};
+export default mainConfig;
+export declare const utilsReg: RegExp;

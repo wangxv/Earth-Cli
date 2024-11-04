@@ -1,13 +1,14 @@
-import { Compiler } from 'webpack';
+import webpack, { Compiler } from 'webpack';
 import { join } from 'path';
 import { existsSync, readdirSync, lstatSync } from 'fs-extra';
 import {
-  pascalize,
+  pascalCase,
   smartOutputFile,
   normalizePath,
 } from '../utils';
 import { ROUTES_FILE, COMPONENTS_FILE, outerConfigDir, MOBILE_ROUTES_FILE } from '../constant'
 import { OuterConfig } from "../types";
+import prodConfig from '../config/webpack.doc.prod';
 import mainConfig from '../config'
 const { componentsSrc } = mainConfig;
 const PLUGIN_NAME = 'GenDesktopRoutesPlugin';
@@ -24,7 +25,7 @@ type DemoItem = {
 };
 
 function formatName(component: string) {
-  return pascalize(component);
+  return pascalCase(component);
 }
 
 /**
@@ -79,7 +80,7 @@ export function genSiteMobile() {
   const dirs = readdirSync(componentsSrc);
   const demos = dirs.map(component => ({
     component,
-    name: pascalize(component),
+    name: pascalCase(component),
     path: join(COMPONENTS_FILE, component, 'demo/index.vue'),
   })).filter(item => existsSync(item.path));
   const code = `
@@ -89,12 +90,11 @@ export function genSiteMobile() {
   smartOutputFile(MOBILE_ROUTES_FILE, code);
 }
 
-
-export async function genSiteEntry() {
+async function genSiteEntry(): Promise<void> {
   return new Promise(resolve => {
     genSiteDesktop();
     genSiteMobile()
-    resolve(true)
+    resolve()
   })
 }
 
@@ -102,4 +102,27 @@ export class GenRoutesPlugin {
   apply(compiler: Compiler) {
     compiler.hooks.beforeCompile.tapPromise(PLUGIN_NAME, genSiteEntry);
   }
+}
+
+export function compileDoc() {
+  return new Promise((resolve, reject) => {
+    webpack(prodConfig, (err, stats) => {
+      if (err || stats?.hasErrors()) {
+        let error: any = err;
+        let warning: any = null;
+        const info: any = stats?.toJson();
+
+        if (stats?.hasErrors()) {
+          error = info.errors;
+        }
+
+        if (stats?.hasWarnings()) {
+          warning = info.warnings;
+        }
+        reject({error, warning});
+      } else {
+        resolve(true);
+      }
+    });
+  })
 }

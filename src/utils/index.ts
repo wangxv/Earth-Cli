@@ -91,16 +91,18 @@ export function smartOutputFile(filePath: string, content: string) {
 }
 
 
-const camelizeRE = /-(\w)/g;
-const pascalizeRE = /(\w)(\w*)/g;
+const camelCaseRE = /-(\w)/g;
+const pascalCaseRE = /(\w)(\w*)/g;
 
-export function camelize(str: string): string {
-  return str.replace(camelizeRE, (_, c) => c.toUpperCase());
+// 小驼峰
+export function camelCase(str: string): string {
+  return str.replace(camelCaseRE, (_, c) => c.toUpperCase());
 }
 
-export function pascalize(str: string): string {
-  return camelize(str).replace(
-    pascalizeRE,
+// 大驼峰
+export function pascalCase(str: string): string {
+  return camelCase(str).replace(
+    pascalCaseRE,
     (_, c1, c2) => c1.toUpperCase() + c2
   );
 }

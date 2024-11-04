@@ -31,8 +31,10 @@ function runDevServer(port: number, config: WebpackConfig) {
   // 禁用无线分布式系统状态日志
   (server as any).showStatus = function() {};
   const host = config.devServer!.host || 'localhost';
+  console.log('server:', server);
 
-  server.listen(port, host, (err?: Error) => {
+  
+  server.server?.listen(port, host, (err?: Error) => {
     if (err) console.log(err);
   });
 }
