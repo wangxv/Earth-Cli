@@ -10,8 +10,6 @@ export declare const srcDir: string;
 export declare const postcssDir: string;
 export declare const jestDir: string;
 export declare const DIST_DIR: string;
-export declare const SITE_DESKTOP_SHARED_FILE: string;
-export declare const SITE_MOBILE_SHARED_FILE: string;
 export declare const PACKAGE_JSON_FILE: string;
 export declare const ROUTES_FILE: string;
 export declare const MOBILE_ROUTES_FILE: string;

@@ -4,6 +4,9 @@
   "description": "组件库打包工具",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "bin": {
+    "earth": "./lib/index.js"
+  },
   "scripts": {
     "start": "tsc -p tsconfig.json -watch",
     "build": "tsc -p tsconfig.json",

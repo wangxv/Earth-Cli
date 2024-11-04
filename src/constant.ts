@@ -20,12 +20,8 @@ export const jestDir = join(projectDir, 'jest.config.js'); // jest文件位置
 
 export const DIST_DIR = join(projectDir, 'dist')
 
-export const SITE_DESKTOP_SHARED_FILE = join(DIST_DIR, 'site-desktop-shared') // pc端网站
-
-export const SITE_MOBILE_SHARED_FILE = join(DIST_DIR, 'site-mobile-shared') // mobile端
-
 export const PACKAGE_JSON_FILE = join(projectDir, 'package.json');
-export const ROUTES_FILE = join(projectDir, 'desktop-routes.js')
+export const ROUTES_FILE = join(projectDir, 'pc-routes.js')
 export const MOBILE_ROUTES_FILE = join(projectDir, 'mobile-routes.js')
 export const COMPONENTS_FILE = join(srcDir, 'components'); // 遍历components组件库
 
