@@ -6,6 +6,7 @@ import mainConfig from './';
 const publicPath = mainConfig.assetsPublicPath;
 const outputDir = joinDir(mainConfig.outputPath);
 
+console.log('devConfig: ', devConfig);
 const prodConfig: WebpackConfig  = merge(devConfig, {
   mode: 'production',
   stats: 'none',

@@ -13,7 +13,6 @@ import {COMPONENTS_JSON, SCRIPT_EXTS, STYLE_EXTS} from "../constant";
 import mainConfig, {utilsReg} from "./";
 import cssImportParser from '../loaders/rollupCssParser';
 import {joinDir, pascalCase, setFullAssetsDir} from "../utils";
-import file from '../utils/file';
 
 const json = require('rollup-plugin-json');
 const {external, rollupJsIncludes, rollupExternal, rollupReplacer} = mainConfig;

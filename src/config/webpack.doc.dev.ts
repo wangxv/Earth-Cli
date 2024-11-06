@@ -5,7 +5,7 @@ import { existsSync } from 'fs-extra';
 import { TemplateOptions, WebpackConfig } from '../types';
 import {setFullAssetsDir, existFile, joinDir} from '../utils';
 import mainConfig from './';
-import { GenRoutesPlugin } from '../compiler/gen-doc';
+import { GenRoutesPlugin } from '../compiler/gen-routes';
 import baseConfig from './webpack.base';
 
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -33,59 +33,56 @@ const getHtmlWebpackPlugin = () => {
   })
 };
 
+console.log('baseConfig: ', baseConfig);
 const devConfig: WebpackConfig = merge(baseConfig, {
-entry,
-output: {
-  chunkFilename: 'static/js/[name].[chunkhash:8].js',
-},
-devtool: 'cheap-module-eval-source-map',
-devServer: {
-  port: 8080,
-  quiet: true,
-  host: '0.0.0.0',
-  stats: 'errors-only',
-  publicPath: '/',
-  disableHostCheck: true
-},
-optimization: {
-  splitChunks: {
-    cacheGroups: {
-      chunks: {
-        chunks: 'all',
-        minChunks: 2,
-        minSize: 0,
-        name: 'chunks'
-      }
-    }
-  }
-},
-plugins: [
-  new ForkTsCheckerWebpackPlugin({
-    eslint: {
-      files: './src/**/*.{ts, tsx, js, jsx, vue}'
-    }
-  }),
-  existsSync(setFullAssetsDir('static')) ? new CopyWebpackPlugin({
-    patterns: [
-      {
-        from: joinDir('static'),
-        to: joinDir('static'),
-        globalOptions: {
-          ignore: ['*.']
+  entry,
+  output: {
+    chunkFilename: 'static/js/[name].[chunkhash:8].js',
+  },
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    port: 8080,
+    quiet: true,
+    host: '0.0.0.0',
+    stats: 'errors-only',
+    publicPath: '/',
+    disableHostCheck: true
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        chunks: {
+          chunks: 'all',
+          minChunks: 2,
+          minSize: 0,
+          name: 'chunks'
         }
       }
-    ]
-  }) : () => {},
-  new MiniCssExtractPlugin({
-    filename: 'static/css/[name].[contenthash:8].css'
-  }),
-  new WebpackBar({
-    name: 'Earth Cli',
-    color: '#11c2bc'
-  }),
-  new GenRoutesPlugin(),
-  ...getHtmlWebpackPlugin()
-]
+    }
+  },
+  plugins: [
+    new ForkTsCheckerWebpackPlugin(),
+    existsSync(setFullAssetsDir('static')) ? new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: joinDir('static'),
+          to: joinDir('static'),
+          globalOptions: {
+            ignore: ['*.']
+          }
+        }
+      ]
+    }) : () => {},
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name].[contenthash:8].css'
+    }),
+    new WebpackBar({
+      name: 'Earth Cli',
+      color: '#11c2bc'
+    }),
+    new GenRoutesPlugin(),
+    ...getHtmlWebpackPlugin()
+  ]
 } as WebpackConfig)
 
 export default devConfig;

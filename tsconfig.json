@@ -3,7 +3,7 @@
     "experimentalDecorators": true,
     "target": "ES2016",
     "outDir": "./lib",
-    "module": "commonjs",
+    "module": "CommonJS",
     "strict": true,
     "declaration": true,
     "skipLibCheck": true,

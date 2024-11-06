@@ -1,4 +1,4 @@
-import { execa } from 'execa';
+import execa from 'execa';
 import ora from 'ora';
 import { SCRIPT_EXTS} from '../constant';
 
